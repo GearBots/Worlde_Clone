@@ -1,3 +1,4 @@
+import os 
 from faker import Faker
 from random import randint
 from sqlalchemy import create_engine, Column, Integer, String, func
@@ -23,10 +24,12 @@ engine = create_engine('sqlite:///wordle.db')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
-df = pd.read_csv("./lib/models/words.csv")
+
+script_dir = os.path.dirname(__file__)
+csv_path = os.path.join(script_dir, 'words.csv')
+df = pd.read_csv(csv_path)
 
 for word in df["word"]:
-    print(word)
     word = Word(word=word)
     session.add(word)
 session.commit()

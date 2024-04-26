@@ -58,12 +58,10 @@ def main():
                 print(f'Welcome {player_instance.name}')
                 second_menu(session, player_instance)
             else:
-                print("Player Not Found. Please Create new Player.")
+                print("Player Not Found. Please Create new Player.")    
+                
 
-        
 
-        
-            
 
         def exit():
             return
