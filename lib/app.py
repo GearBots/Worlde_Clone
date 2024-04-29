@@ -43,6 +43,8 @@ def main():
             existing_player = session.query(Player).filter(Player.name == name).first()
             if existing_player:
                 print(f"{name} Already Exists. Please Sign In.")
+                main_menu()
+
             else:
                 new_player = Player(name=name)
                 session.add(new_player)
@@ -58,7 +60,8 @@ def main():
                 print(f'Welcome {player_instance.name}')
                 second_menu(session, player_instance)
             else:
-                print("Player Not Found. Please Create new Player.")    
+                print("Player Not Found. Please Create new Player.")
+                main_menu() 
                 
 
 
@@ -110,6 +113,7 @@ def main():
                     session.commit()
             else: 
                 print("You lost. The word was " + wordle.secret)
+                second_menu(session, player_instance)
 
         def display_results(wordle: Wordle):
             print("\nYour results so far ...")
@@ -123,7 +127,7 @@ def main():
                 lines.append(colored_results)
             for _ in range(wordle.attempts_left):
                 lines.append(" ".join(["_"] * wordle.WORD_LENGTH))
-            print("\n".join(lines))
+            # print("\n".join(lines))
             create_board(lines)
             
 
@@ -172,6 +176,7 @@ def main():
             for player in players:
                 player_scores = ', '.join(map(str, top_scores[player.id]))
                 print(f"{player.name}: {player_scores}")
+                second_menu(session, player_instance)
         
         def edit_player(session, player_instance):
             def edit_menu():
