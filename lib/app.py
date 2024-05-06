@@ -111,6 +111,7 @@ def main():
                     print("You guessed it! You're score is " + str(len(wordle.attempts)))
                     player_instance.record_high_score(len(wordle.attempts))
                     session.commit()
+                    second_menu(session, player_instance)
             else: 
                 print("You lost. The word was " + wordle.secret)
                 second_menu(session, player_instance)
@@ -176,7 +177,7 @@ def main():
             for player in players:
                 player_scores = ', '.join(map(str, top_scores[player.id]))
                 print(f"{player.name}: {player_scores}")
-                second_menu(session, player_instance)
+            second_menu(session, player_instance)
         
         def edit_player(session, player_instance):
             def edit_menu():
